@@ -28,54 +28,52 @@ public class GenerateToken extends Activity {
 		String json = "";
 		int status;
 		int c;
-		try
-		{
-			  EditText ip = (EditText) findViewById(R.id.ip_message);
-			  EditText port = (EditText) findViewById(R.id.port_message);
-			  EditText username = (EditText) findViewById(R.id.username_message);
-			  EditText password = (EditText) findViewById(R.id.password_message);
-			
-			URL hp = new URL("http", ip.getText().toString(), Integer.parseInt(port.getText().toString()), "/token/create/" + username.getText().toString() + "/" + password.getText().toString());
+		try {
+			EditText ip = (EditText) findViewById(R.id.ip_message);
+			EditText port = (EditText) findViewById(R.id.port_message);
+			EditText username = (EditText) findViewById(R.id.username_message);
+			EditText password = (EditText) findViewById(R.id.password_message);
+
+			URL hp = new URL("http", ip.getText().toString(),
+					Integer.parseInt(port.getText().toString()),
+					"/token/create/" + username.getText().toString() + "/"
+							+ password.getText().toString());
 			URLConnection hpCon = hp.openConnection();
-			if(hpCon.getContentLength() > 0)
-			{
+			if (hpCon.getContentLength() > 0) {
 				InputStream input = hpCon.getInputStream();
-				int i=hpCon.getContentLength();
-				while(((c = input.read()) != -1) && (--i > 0))
-				{	
+				int i = hpCon.getContentLength();
+				while (((c = input.read()) != -1) && (--i > 0)) {
 					json = json + ((char) c);
 				}
 				input.close();
 				JSONObject jObject = new JSONObject(json);
 				status = jObject.getInt("status");
-				if(status == 200)
-				{
+				if (status == 200) {
 					token = jObject.getString("token");
 					TextView textView = new TextView(this);
-					 textView.setText("Token generated successfully. Token: " + token);
-					 setContentView(textView);
-				}
-				else
-				{
+					textView.setText("Token generated successfully. Token: "
+							+ token);
+					setContentView(textView);
+				} else {
 					String error = jObject.getString("error");
-					 TextView textView = new TextView(this);
-					 textView.setText("An error occured when generating the token: " + error + ".");
-					 setContentView(textView);
+					TextView textView = new TextView(this);
+					textView.setText("An error occured when generating the token: "
+							+ error + ".");
+					setContentView(textView);
 				}
-				//TokenDialog.onCreateDialog();			
-			}
-			else//rest API not enabled?
+				// TokenDialog.onCreateDialog();
+			} else// rest API not enabled?
 			{
-				 TextView textView = new TextView(this);
-				 textView.setText("An unknown error occured.");
-				 setContentView(textView);	
+				TextView textView = new TextView(this);
+				textView.setText("An unknown error occured.");
+				setContentView(textView);
 			}
-		}
-		catch(Exception ex)//cannot connect.
+		} catch (Exception ex)// cannot connect.
 		{
-			 TextView textView = new TextView(this);
-			 textView.setText("An error occured when connecting to the server: " + ex.toString() + ".");
-			 setContentView(textView);
+			TextView textView = new TextView(this);
+			textView.setText("An error occured when connecting to the server: "
+					+ ex.toString() + ".");
+			setContentView(textView);
 		}
 	}
 
