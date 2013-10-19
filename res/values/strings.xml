@@ -6,9 +6,14 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_generate_token">Generate Token</string>
     <string name="generate_message">Please enter your server\'\s IP and REST API port, and the login information of an admin account on the server.</string>
-	<string name="ip_message">Enter your IP</string>
-	<string name="port_message">Enter your Port</string>
-	<string name="username_message">Enter your username</string>
-	<string name="password_message">Enter your password</string>
-	<string name="button_generate">Generate Token</string>
+    <string name="ip_message">Enter your IP</string>
+    <string name="port_message">Enter your Port</string>
+    <string name="username_message">Enter your username</string>
+    <string name="password_message">Enter your password</string>
+    <string name="button_generate">Generate Token</string>
+    <string name="server_broadcast">Server broadcast</string>
+    <string name="message">Message</string>
+    <string name="placeholder">Command Activity</string>
+    <string name="submit">Submit</string>
+
 </resources>
