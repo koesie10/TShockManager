@@ -21,7 +21,8 @@ public class EventTypeInfo {
 	 * @param params
 	 *            A list with params that can be used for this event type
 	 */
-	public EventTypeInfo(int titleResId, boolean visible, EventParamList params) {
+	public EventTypeInfo(int titleResId, boolean visible,
+			EventParamList params) {
 		super();
 		this.titleResId = titleResId;
 		this.visible = visible;
@@ -57,7 +58,7 @@ public class EventTypeInfo {
 	 * Constructs a new {@code EventTypeInfo}
 	 */
 	public EventTypeInfo() {
-		this(0, false, null);
+		this(null);
 	}
 
 	/**
@@ -88,5 +89,7 @@ public class EventTypeInfo {
 	public EventParamList getParams() {
 		return params;
 	}
+	
+	
 
 }

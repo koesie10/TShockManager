@@ -11,6 +11,32 @@ public class EventParam {
 	private String paramName;
 	private int paramString;
 	private int type;
+	private int defaultValue;
+
+	/**
+	 * Constructs a new event parameter
+	 * 
+	 * @param paramName
+	 *            The name that should be used in the request
+	 * @param paramString
+	 *            The resource ID of the string that should be presented to the
+	 *            user
+	 * @param type
+	 *            The type of parameter, constants are defined in
+	 *            {@link android.text.InputType}
+	 * @param defaultValue
+	 *            The default value of this param
+	 * 
+	 * @see android.text.InputType
+	 */
+	public EventParam(String paramName, int paramString, int type,
+			int defaultValue) {
+		super();
+		this.paramName = paramName;
+		this.paramString = paramString;
+		this.type = type;
+		this.defaultValue = defaultValue;
+	}
 
 	/**
 	 * Constructs a new event parameter
@@ -27,10 +53,7 @@ public class EventParam {
 	 * @see android.text.InputType
 	 */
 	public EventParam(String paramName, int paramString, int type) {
-		super();
-		this.paramName = paramName;
-		this.paramString = paramString;
-		this.type = type;
+		this(paramName, paramString, type, 0);
 	}
 
 	/**
@@ -72,6 +95,13 @@ public class EventParam {
 	 */
 	public int getType() {
 		return type;
+	}
+
+	/**
+	 * @return the defaultValue
+	 */
+	public int getDefaultValue() {
+		return defaultValue;
 	}
 
 }

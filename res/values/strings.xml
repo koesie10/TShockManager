@@ -11,9 +11,26 @@
     <string name="username_message">Enter your username</string>
     <string name="password_message">Enter your password</string>
     <string name="button_generate">Generate Token</string>
-    <string name="server_broadcast">Server broadcast</string>
-    <string name="message">Message</string>
-    <string name="placeholder">Command Activity</string>
+    <string name="placeholder">…</string>
     <string name="submit">Submit</string>
+    
+    <!-- Server commands -->
+    <!-- Titles -->
+    <string name="server_broadcast">Server broadcast</string>
+    <string name="server_off">Server off</string>
+    <string name="server_restart">Server restart</string>
+    <string name="rawcmd">Execute command</string>
+    <!-- Params -->
+    <string name="message">Message</string>
+    <string name="confirm">Confirm (true is confirm)</string>
+    <string name="nosave">Do not save</string>
+    <string name="cmd">Command</string>
+    <!-- Values -->
+    <string name="boolean_true">true</string>
+    <string name="boolean_false">true</string>
+    <string name="slash">/</string>
+    
+    <!-- Settings -->
+    <string name="save">Save</string>
 
 </resources>

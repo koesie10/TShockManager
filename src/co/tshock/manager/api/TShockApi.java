@@ -101,7 +101,7 @@ public class TShockApi {
 	 * @see co.tshock.manager.events.Event#getData()
 	 */
 	public static void status() {
-		get(EventType.STATUS, new TShockResponseHandler.DataProcessor() {
+		get(EventType.SERVER_STATUS, new TShockResponseHandler.DataProcessor() {
 
 			@Override
 			public void parseResponse(JSONObject object,

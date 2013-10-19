@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -64,9 +63,14 @@ public abstract class BaseCommandActivity extends BaseActivity {
 					R.layout.event_param, null);
 			EditText editText = (EditText) paramView
 					.findViewById(R.id.eventParamEditText);
-			editText.setHint(param.getParamString());
+			if (param.getParamString() > 0) {
+				editText.setHint(param.getParamString());
+			}
 			editText.setInputType(param.getType());
 			editText.setImeOptions(EditorInfo.IME_ACTION_SEND);
+			if (param.getDefaultValue() > 0) {
+				editText.setText(param.getDefaultValue());
+			}
 
 			editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
@@ -187,15 +191,6 @@ public abstract class BaseCommandActivity extends BaseActivity {
 			Map<String, Object> data) throws JSONException;
 
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.command, menu);
-		return true;
-	}
-
-	/**
 	 * Sets the event type which is used to create a layout
 	 * 
 	 * @param type
@@ -219,9 +214,11 @@ public abstract class BaseCommandActivity extends BaseActivity {
 		@Override
 		public void onEvent(Event event) {
 			if (event.getType() == EventType.ERROR) {
-				Log.e(TAG, "An error occured while executing this command: " + event.toString());
+				Log.e(TAG, "An error occured while executing this command: "
+						+ event.toString());
 			} else if (event.getType() == eventType) {
-				Log.i(TAG, "The event has been received! :) " + event.toString());
+				Log.i(TAG,
+						"The event has been received! :) " + event.toString());
 			} else {
 				Log.e(TAG,
 						"An event that can not be handled by the CommandEventListener has been received: "

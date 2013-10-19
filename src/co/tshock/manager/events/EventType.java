@@ -1,5 +1,6 @@
 package co.tshock.manager.events;
 
+import android.text.InputType;
 import co.tshock.manager.R;
 
 /**
@@ -21,19 +22,22 @@ public enum EventType {
 	 */
 	CREATE_TOKEN("/v2/token/create/%2$s?username=%1$s"),
 	/**
-	 * This event will create a token and this will be broadcasted to the
-	 * listeners
-	 * 
-	 * @see co.tshock.manager.api.TShockApi#status()
-	 */
-	STATUS("/status"),
-	/**
 	 * This event will destroy a token and this will be broadcasted to the
 	 * listeners
 	 * 
 	 * @see co.tshock.manager.api.TShockApi#destroyToken()
 	 */
 	DESTROY_TOKEN("/token/destroy/%s"),
+	TOKENTEST("/tokentest"),
+	/**
+	 * This event will create a token and this will be broadcasted to the
+	 * listeners
+	 * 
+	 * @see co.tshock.manager.api.TShockApi#status()
+	 */
+	SERVER_STATUS("/v2/server/status"),
+	SERVER_MOTD("/v3/server/motd"),
+	SERVER_RULES("v3/server/rules"),
 	/**
 	 * This event will broadcast a message to the players on the TShock server
 	 * and this will be broadcasted to the listeners with the message in the
@@ -44,7 +48,30 @@ public enum EventType {
 	SERVER_BROADCAST("/v2/server/broadcast", new EventTypeInfo(
 			R.string.server_broadcast, true,
 			new EventParamList(new EventParam[] { new EventParam("msg",
-					R.string.message) })));
+					R.string.message) }))),
+	SERVER_RELOAD("/v3/server/reload"),
+	SERVER_OFF("/v2/server/off", new EventTypeInfo(R.string.server_off, true,
+			new EventParamList(
+					new EventParam[] {
+							new EventParam("confirm", R.string.confirm,
+									InputType.TYPE_CLASS_TEXT,
+									R.string.boolean_true),
+							new EventParam("nosave", R.string.nosave,
+									InputType.TYPE_CLASS_TEXT,
+									R.string.boolean_false) }))),
+	SERVER_RESTART("/v3/server/restart", new EventTypeInfo(
+			R.string.server_restart, true, new EventParamList(
+					new EventParam[] {
+							new EventParam("confirm", R.string.confirm,
+									InputType.TYPE_CLASS_TEXT,
+									R.string.boolean_true),
+							new EventParam("nosave", R.string.nosave,
+									InputType.TYPE_CLASS_TEXT,
+									R.string.boolean_false) }))),
+	SERVER_RAWCMD("/v3/server/rawcmd",
+			new EventTypeInfo(R.string.rawcmd, true, new EventParamList(
+					new EventParam[] { new EventParam("cmd", R.string.cmd,
+							InputType.TYPE_CLASS_TEXT, R.string.slash) })));
 
 	private String url;
 	private EventTypeInfo info;
