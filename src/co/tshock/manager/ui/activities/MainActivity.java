@@ -1,41 +1,64 @@
 package co.tshock.manager.ui.activities;
 
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import co.tshock.manager.R;
+import co.tshock.manager.adapter.ServerAdapter;
+import co.tshock.manager.api.Server;
 import co.tshock.manager.ui.activities.server.CreateTokenActivity;
-import co.tshock.manager.ui.activities.server.ServerBroadcastActivity;
+import co.tshock.manager.ui.dialogs.AddServerDialogFragment;
 
 public class MainActivity extends BaseActivity {
+	
+	private ListView listView;
+	private ListAdapter listAdapter;
+	private ArrayList<Server> servers;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		listView = (ListView) findViewById(R.id.mainListView);
+		servers = new ArrayList<Server>();
+		servers.add(new Server("Rinse", "192.168.3.45", 7878));
+		listAdapter = new ServerAdapter(this, servers);
+		
+		listView.setAdapter(listAdapter);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.action_add:
+			AddServerDialogFragment addServerDialogFragment = new AddServerDialogFragment();
+			addServerDialogFragment.show(getSupportFragmentManager(), "add_server");
+			break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		super.onCreateOptionsMenu(menu);
-		menu.add("Test");
+		getMenuInflater().inflate(R.menu.server_list, menu);
 		return true;
 	}
 
 	public void generateButton(View view) {
 		Intent intent = new Intent(this, CreateTokenActivity.class);
 		startActivity(intent);
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getTitle().toString().equals("Test")) {
-			Intent intent = new Intent(this, ServerBroadcastActivity.class);
-			startActivity(intent);
-		}
-		return super.onOptionsItemSelected(item);
 	}
 }
