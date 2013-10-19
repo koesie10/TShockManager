@@ -1,8 +1,18 @@
 package co.tshock.manager.api;
 
+import com.j256.ormlite.field.DatabaseField;
+
 public class Server {
+	@DatabaseField(generatedId = true)
+	private int id;
+	
+	@DatabaseField
 	private String displayName;
+	
+	@DatabaseField
 	private String ip;
+	
+	@DatabaseField
 	private int port;
 
 	/**
@@ -118,7 +128,7 @@ public class Server {
 	 */
 	@Override
 	public String toString() {
-		return "[Server] displayName=" + displayName + ",ip=" + ip + ",port"
+		return "[Server] id=" + id + ",displayName=" + displayName + ",ip=" + ip + ",port"
 				+ port + ",host=" + getHost();
 	}
 }

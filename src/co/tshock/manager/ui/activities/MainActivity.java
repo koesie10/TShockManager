@@ -2,6 +2,8 @@ package co.tshock.manager.ui.activities;
 
 import java.util.ArrayList;
 
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,8 +12,9 @@ import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import co.tshock.manager.R;
-import co.tshock.manager.adapter.ServerAdapter;
 import co.tshock.manager.api.Server;
+import co.tshock.manager.data.adapter.ServerAdapter;
+import co.tshock.manager.data.sqlite.DatabaseHelper;
 import co.tshock.manager.ui.activities.server.CreateTokenActivity;
 import co.tshock.manager.ui.dialogs.AddServerDialogFragment;
 
@@ -60,5 +63,13 @@ public class MainActivity extends BaseActivity {
 	public void generateButton(View view) {
 		Intent intent = new Intent(this, CreateTokenActivity.class);
 		startActivity(intent);
+	}
+	
+	@Override
+	protected void onDestroy() {
+	    super.onDestroy();
+	    if (DatabaseHelper.getInstance(this) != null) {
+	        OpenHelperManager.releaseHelper();
+	    }
 	}
 }

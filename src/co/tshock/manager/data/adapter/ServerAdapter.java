@@ -1,7 +1,7 @@
 /**
  * 
  */
-package co.tshock.manager.adapter;
+package co.tshock.manager.data.adapter;
 
 import java.util.ArrayList;
 
