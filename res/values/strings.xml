@@ -18,7 +18,7 @@
     <string name="cmd">Command</string>
     <!-- Values -->
     <string name="boolean_true">true</string>
-    <string name="boolean_false">true</string>
+    <string name="boolean_false">false</string>
     <string name="slash">/</string>
 
     <!-- Dashboard -->
@@ -60,8 +60,6 @@
     <string name="action_edit">Edit</string>
     <string name="action_remove">Remove</string>
     <string name="action_refresh">Refresh</string>
-    <string name="title_activity_server">ServerActivity</string>
-    <string name="title_activity_dashboard">DashboardActivity</string>
     
     <!-- Command groups -->
     <string name="server">Server</string>

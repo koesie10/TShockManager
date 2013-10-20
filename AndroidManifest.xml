@@ -33,7 +33,7 @@
         <activity
             android:name="co.tshock.manager.ui.activities.dashboard.DashboardActivity"
             android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_dashboard" >
+            android:label="@string/placeholder" >
         </activity>
     </application>
 
