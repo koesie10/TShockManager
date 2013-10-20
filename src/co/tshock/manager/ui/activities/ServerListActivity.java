@@ -10,7 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import co.tshock.manager.Constants;
 import co.tshock.manager.R;
 import co.tshock.manager.api.Server;
 import co.tshock.manager.data.adapter.ServerAdapter;
@@ -19,10 +21,10 @@ import co.tshock.manager.events.Event;
 import co.tshock.manager.events.EventListener;
 import co.tshock.manager.events.EventManager;
 import co.tshock.manager.events.EventType;
-import co.tshock.manager.ui.activities.server.CreateTokenActivity;
+import co.tshock.manager.ui.activities.dashboard.DashboardActivity;
 import co.tshock.manager.ui.dialogs.ServerDialogFragment;
 
-public class MainActivity extends BaseActivity {
+public class ServerListActivity extends BaseActivity {
 
 	private ListView listView;
 	private ServerAdapter listAdapter;
@@ -47,6 +49,19 @@ public class MainActivity extends BaseActivity {
 				});
 
 		registerForContextMenu(listView);
+
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Server server = (Server) parent.getItemAtPosition(position);
+				Intent intent = new Intent(ServerListActivity.this, DashboardActivity.class);
+				intent.putExtra(Constants.ARGS_SERVER, server);
+				startActivity(intent);
+			}
+
+		});
 	}
 
 	@Override
@@ -69,7 +84,7 @@ public class MainActivity extends BaseActivity {
 		case R.id.action_edit:
 			ServerDialogFragment editServerDialogFragment = new ServerDialogFragment();
 			Bundle args = new Bundle();
-			args.putParcelable(ServerDialogFragment.ARGS_SERVER, server);
+			args.putParcelable(Constants.ARGS_SERVER, server);
 			editServerDialogFragment.setArguments(args);
 			editServerDialogFragment.show(getSupportFragmentManager(),
 					"edit_server");
@@ -109,11 +124,6 @@ public class MainActivity extends BaseActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.server_list, menu);
 		return true;
-	}
-
-	public void generateButton(View view) {
-		Intent intent = new Intent(this, CreateTokenActivity.class);
-		startActivity(intent);
 	}
 
 	@Override

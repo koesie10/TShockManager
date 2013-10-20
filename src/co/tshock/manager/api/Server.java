@@ -26,6 +26,9 @@ public class Server implements Parcelable {
 	@DatabaseField
 	private String password;
 
+	@DatabaseField(columnName = "last_token")
+	private String token;
+
 	/**
 	 * Construct a new server
 	 * 
@@ -138,6 +141,21 @@ public class Server implements Parcelable {
 	 */
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	/**
+	 * @return the token
+	 */
+	public String getToken() {
+		return token;
+	}
+
+	/**
+	 * @param token
+	 *            the token to set
+	 */
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	/**

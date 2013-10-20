@@ -18,7 +18,7 @@ import co.tshock.manager.api.Server;
  */
 public class ServerAdapter extends BaseAdapter {
 	private final String TAG = this.getClass().getSimpleName();
-	
+
 	private Context context;
 	private List<Server> servers;
 
@@ -70,29 +70,33 @@ public class ServerAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View view = convertView;
+		ViewHolder holder;
 		if (view == null) {
 			LayoutInflater inflater = (LayoutInflater) context
 					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-			view = inflater
-					.inflate(R.layout.server_row, parent, false);
-			ViewHolder viewHolder = new ViewHolder();
-			viewHolder.displayName = (TextView) view.findViewById(R.id.displayNameTextView);
-			viewHolder.host = (TextView) view.findViewById(R.id.hostTextView);
-			viewHolder.username = (TextView) view.findViewById(R.id.usernameTextView);
-			view.setTag(viewHolder);
+			view = inflater.inflate(R.layout.server_row, parent, false);
+			holder = new ViewHolder();
+			holder.displayName = (TextView) view
+					.findViewById(R.id.displayNameTextView);
+			holder.host = (TextView) view.findViewById(R.id.hostTextView);
+			holder.username = (TextView) view
+					.findViewById(R.id.usernameTextView);
+			view.setTag(holder);
+		} else {
+			holder = (ViewHolder) view.getTag();
 		}
-		
-		ViewHolder holder = (ViewHolder) view.getTag();
-		
+
 		Server server = servers.get(position);
-		
+
 		holder.displayName.setText(server.getDisplayName());
-		holder.host.setText(String.format("%s:%d", server.getIp(), server.getPort()));
+		holder.host.setText(String.format("%s:%d", server.getIp(),
+				server.getPort()));
 		holder.username.setText(server.getUsername());
+
 		return view;
 	}
-	
+
 	public void setList(List<Server> servers) {
 		this.servers = servers;
 		this.notifyDataSetChanged();

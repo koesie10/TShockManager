@@ -7,7 +7,7 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
-
+import co.tshock.manager.events.Event;
 import co.tshock.manager.events.EventType;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -20,24 +20,13 @@ import com.loopj.android.http.RequestParams;
  * @author koesie10
  */
 public class TShockApi {
-	private static int port = 7878;
-	private static String ip = "";
+	private static Server server;
 	private static final String TAG = TShockApi.class.getSimpleName();
-	private static String token;
 
 	private static AsyncHttpClient client = new AsyncHttpClient();
-
-	/**
-	 * Sets the server to which all request will be targeted
-	 * 
-	 * @param newIp
-	 *            The IP to use to redirect requests to
-	 * @param newPort
-	 *            The port to redirect requests to
-	 */
-	public static void setServer(String newIp, int newPort) {
-		ip = newIp;
-		port = newPort;
+	
+	public static void tokentest() {
+		get(EventType.TOKENTEST);
 	}
 
 	/**
@@ -51,19 +40,20 @@ public class TShockApi {
 	 * @param password
 	 *            The password of the server account authenticating to
 	 */
-	public static void createToken(final String username, final String password) {
+	public static void createToken() {
 		get(EventType.CREATE_TOKEN, new TShockResponseHandler.DataProcessor() {
 			@Override
 			public void parseResponse(JSONObject object,
 					Map<String, Object> data) throws JSONException {
-				token = object.getString("token");
-				data.put("token", "token");
-				data.put("username", username);
-				data.put("password", password);
+				String token = object.getString("token");
+				server.setToken(token);
+				data.put("token", token);
+				data.put("username", server.getUsername());
+				data.put("password", server.getPassword());
 				Log.i(TAG, String.format("Successfully authenticated with %s",
-						token));
+						server.getToken()));
 			}
-		}, username, password);
+		}, server.getUsername(), server.getPassword());
 	}
 
 	/**
@@ -77,10 +67,10 @@ public class TShockApi {
 			@Override
 			public void parseResponse(JSONObject object,
 					Map<String, Object> data) throws JSONException {
-				token = null;
+				server.setToken(null);
 				Log.i(TAG, "Successfully destroyed token");
 			}
-		}, token);
+		}, server.getToken());
 	}
 
 	/**
@@ -95,7 +85,7 @@ public class TShockApi {
 	 * <li>int maxPlayer</li>
 	 * <li>String world</li>
 	 * <li>String uptime</li>
-	 * <li>boolean|String serverPassword</li>
+	 * <li>boolean serverPassword</li>
 	 * </ul>
 	 * 
 	 * @see co.tshock.manager.events.Event#getData()
@@ -137,32 +127,21 @@ public class TShockApi {
 					}
 				});
 	}
+	
+	
 
 	/**
-	 * Checks whether the token has been set and is not empty
-	 * 
-	 * @return whether the api is authenticated
+	 * @return the server
 	 */
-	public static boolean isAuthenticated() {
-		return (token != null && token != "");
+	public static Server getServer() {
+		return server;
 	}
 
 	/**
-	 * Gets the current IP
-	 * 
-	 * @return the ip
+	 * @param server the server to set
 	 */
-	public static String getIp() {
-		return ip;
-	}
-
-	/**
-	 * Gets the current port
-	 * 
-	 * @return the port
-	 */
-	public static int getPort() {
-		return port;
+	public static void setServer(Server server) {
+		TShockApi.server = server;
 	}
 
 	/**
@@ -175,7 +154,7 @@ public class TShockApi {
 	 * @see #getPort()
 	 */
 	public static String getBaseUrl() {
-		return String.format("http://%s:%d", ip, port);
+		return String.format("http://%s:%d", server.getIp(), server.getPort());
 	}
 
 	public static void get(EventType type,
@@ -217,8 +196,8 @@ public class TShockApi {
 		if (params == null) {
 			params = new RequestParams();
 		}
-		if (isAuthenticated()) {
-			params.put("token", token);
+		if (server.getToken() != null && !server.getToken().equals("")) {
+			params.put("token", server.getToken());
 		}
 		Log.i(TAG,
 				"Sending a new request: (url=" + url + ", params="

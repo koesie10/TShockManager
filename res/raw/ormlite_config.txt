@@ -1,5 +1,5 @@
 #
-# generated on 2013/10/20 12:19:26
+# generated on 2013/10/20 01:29:31
 #
 # --table-start--
 dataClass=co.tshock.manager.api.Server
@@ -24,6 +24,10 @@ fieldName=username
 # --field-end--
 # --field-start--
 fieldName=password
+# --field-end--
+# --field-start--
+fieldName=token
+columnName=last_token
 # --field-end--
 # --table-fields-end--
 # --table-end--

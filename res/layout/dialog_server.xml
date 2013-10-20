@@ -8,7 +8,8 @@
         android:id="@+id/ipEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/ip" >
+        android:hint="@string/ip"
+        android:singleLine="true" >
 
         <requestFocus />
     </EditText>
@@ -18,20 +19,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/port"
-        android:inputType="number" />
+        android:inputType="number"
+        android:singleLine="true" />
 
     <EditText
         android:id="@+id/displayNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/display_name" />
+        android:hint="@string/display_name"
+        android:singleLine="true" />
 
     <EditText
         android:id="@+id/usernameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/username" />
+        android:hint="@string/username"
+        android:singleLine="true" />
 
     <EditText
         android:id="@+id/passwordEditText"
@@ -39,7 +43,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:singleLine="true" />
 
     <Button
         android:id="@+id/saveButton"
