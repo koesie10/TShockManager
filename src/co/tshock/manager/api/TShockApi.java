@@ -128,6 +128,24 @@ public class TShockApi {
 				});
 	}
 	
+	/**
+	 * Turns off the server, you will get an ERROR as the server will not respond (correctly)!
+	 */
+	public static void serverOff() {
+		RequestParams params = new RequestParams();
+		params.put("confirm", "true");
+		get(EventType.SERVER_OFF, params);
+	}
+	
+	/**
+	 * Restart off the server, you will get an ERROR as the server will not respond (correctly)!
+	 */
+	public static void serverRestart() {
+		RequestParams params = new RequestParams();
+		params.put("confirm", "true");
+		get(EventType.SERVER_RESTART, params);
+	}
+	
 	
 
 	/**

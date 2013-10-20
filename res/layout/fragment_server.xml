@@ -126,6 +126,25 @@
                 android:layout_height="wrap_content"
                 android:text="@string/placeholder" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+            
+            <Button
+                android:id="@+id/serverOffButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="true"
+                android:text="@string/server_off" />
+            <Button
+                android:id="@+id/serverRestartButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="true"
+                android:text="@string/server_restart" />
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

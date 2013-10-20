@@ -16,8 +16,8 @@
     <!-- Server commands -->
     <!-- Titles -->
     <string name="server_broadcast">Server broadcast</string>
-    <string name="server_off">Server off</string>
-    <string name="server_restart">Server restart</string>
+    <string name="server_off">Off</string>
+    <string name="server_restart">Restart</string>
     <string name="rawcmd">Execute command</string>
     <!-- Params -->
     <string name="message">Message</string>

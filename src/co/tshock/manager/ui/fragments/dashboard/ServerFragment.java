@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import co.tshock.manager.R;
 import co.tshock.manager.api.Server;
@@ -31,6 +32,8 @@ public class ServerFragment extends BaseDashboardFragment implements
 	private TextView serverWorldTextView;
 	private TextView serverUptimeTextView;
 	private TextView serverPasswordTextView;
+	private Button serverOffButton;
+	private Button serverRestartButton;
 	private ServerStatus serverStatus;
 
 	@Override
@@ -83,6 +86,30 @@ public class ServerFragment extends BaseDashboardFragment implements
 				.findViewById(R.id.serverUptimeTextView);
 		this.serverPasswordTextView = (TextView) v
 				.findViewById(R.id.serverPasswordTextView);
+		this.serverOffButton = (Button) v.findViewById(R.id.serverOffButton);
+		this.serverRestartButton = (Button) v.findViewById(R.id.serverRestartButton);
+
+		this.serverOffButton.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Ask for a confirmation
+				// TODO Show a progress dialog
+				TShockApi.serverOff();
+
+			}
+		});
+
+		this.serverRestartButton.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Ask for a confirmation
+				// TODO Show a progress dialog
+				TShockApi.serverRestart();
+
+			}
+		});
 
 		refreshInterface();
 
