@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Tshock Manager</string>
+    <string name="app_name">TShock Manager</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_generate_token">Generate Token</string>
     <string name="generate_message">Please enter your server\'\s IP and REST API port, and the login information of an admin account on the server.</string>
