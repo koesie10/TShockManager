@@ -56,7 +56,6 @@
 
     <!-- Dialogs -->
     <!-- Server -->
-    <string name="save">Save</string>
     <string name="ip">Server IP</string>
     <string name="port">Server REST port (leave empty for 7878)</string>
     <string name="display_name">Display name (leave empty for default)</string>
