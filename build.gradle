@@ -17,6 +17,25 @@ dependencies {
 }
 
 android {
+
+	buildTypes {
+        debug {
+            packageNameSuffix ".debug"
+            zipAlign true
+        }
+
+        beta {
+        	zipAlign true
+            packageNameSuffix ".beta"
+        }
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("debug.keystore")
+        }
+    }
+
 	buildToolsVersion "18.1.1"
 	compileSdkVersion 18
     sourceSets {
@@ -41,5 +60,6 @@ android {
         // by a similar customization.
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
+        beta.setRoot('build-types/beta')
     }
 }
