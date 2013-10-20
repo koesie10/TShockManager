@@ -14,6 +14,7 @@ public enum EventType {
 	 * additional details in error and/or exception in {@link Event#getData()}
 	 */
 	ERROR,
+	SERVER_LIST_CHANGED,
 	/**
 	 * This event will create a token and this will be broadcasted to the
 	 * listeners with token in {@link Event#getData()}

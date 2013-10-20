@@ -17,8 +17,8 @@
         android:id="@+id/portEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:hint="@string/port" />
+        android:hint="@string/port"
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/displayNameEditText"
@@ -26,10 +26,25 @@
         android:layout_height="wrap_content"
         android:hint="@string/display_name" />
 
+    <EditText
+        android:id="@+id/usernameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/username" />
+
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword" />
+
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_server" />
+        android:text="@string/save" />
 
 </LinearLayout>

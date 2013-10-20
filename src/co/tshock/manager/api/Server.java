@@ -1,19 +1,30 @@
 package co.tshock.manager.api;
 
-import com.j256.ormlite.field.DatabaseField;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Server {
-	@DatabaseField(generatedId = true)
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "servers")
+public class Server implements Parcelable {
+	@DatabaseField(generatedId = true, columnName = "_id")
 	private int id;
-	
+
 	@DatabaseField
 	private String displayName;
-	
+
 	@DatabaseField
 	private String ip;
-	
+
 	@DatabaseField
 	private int port;
+
+	@DatabaseField
+	private String username;
+
+	@DatabaseField
+	private String password;
 
 	/**
 	 * Construct a new server
@@ -22,11 +33,21 @@ public class Server {
 	 * @param ip
 	 * @param port
 	 */
-	public Server(String displayName, String ip, int port) {
+	public Server(String displayName, String ip, int port, String username,
+			String password) {
 		super();
 		this.displayName = displayName;
 		this.ip = ip;
 		this.port = port;
+		this.username = username;
+		this.password = password;
+	}
+
+	/**
+	 * Construct a new server with empty values
+	 */
+	public Server() {
+		super();
 	}
 
 	/**
@@ -83,6 +104,53 @@ public class Server {
 	}
 
 	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return username;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param username
+	 *            the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	/**
+	 * @param password
+	 *            the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		return "Server [id=" + id + ", displayName=" + displayName + ", ip="
+				+ ip + ", port=" + port + ", username=" + username
+				+ ", password=" + password + ", getHost()=" + getHost() + "]";
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -91,8 +159,13 @@ public class Server {
 		int result = 1;
 		result = prime * result
 				+ ((displayName == null) ? 0 : displayName.hashCode());
+		result = prime * result + id;
 		result = prime * result + ((ip == null) ? 0 : ip.hashCode());
+		result = prime * result
+				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result + port;
+		result = prime * result
+				+ ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
@@ -113,22 +186,58 @@ public class Server {
 				return false;
 		} else if (!displayName.equals(other.displayName))
 			return false;
+		if (id != other.id)
+			return false;
 		if (ip == null) {
 			if (other.ip != null)
 				return false;
 		} else if (!ip.equals(other.ip))
 			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
 		if (port != other.port)
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
 			return false;
 		return true;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String toString() {
-		return "[Server] id=" + id + ",displayName=" + displayName + ",ip=" + ip + ",port"
-				+ port + ",host=" + getHost();
+	protected Server(Parcel in) {
+		id = in.readInt();
+		displayName = in.readString();
+		ip = in.readString();
+		port = in.readInt();
+		username = in.readString();
+		password = in.readString();
 	}
+
+	public int describeContents() {
+		return 0;
+	}
+
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeInt(id);
+		dest.writeString(displayName);
+		dest.writeString(ip);
+		dest.writeInt(port);
+		dest.writeString(username);
+		dest.writeString(password);
+	}
+
+	public static final Parcelable.Creator<Server> CREATOR = new Parcelable.Creator<Server>() {
+		public Server createFromParcel(Parcel in) {
+			return new Server(in);
+		}
+
+		public Server[] newArray(int size) {
+			return new Server[size];
+		}
+	};
+
 }

@@ -1,9 +1,6 @@
-/**
- * 
- */
 package co.tshock.manager.data.adapter;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -20,10 +17,12 @@ import co.tshock.manager.api.Server;
  * @author koesie10
  */
 public class ServerAdapter extends BaseAdapter {
+	private final String TAG = this.getClass().getSimpleName();
+	
 	private Context context;
-	private ArrayList<Server> servers;
+	private List<Server> servers;
 
-	public ServerAdapter(Context context, ArrayList<Server> servers) {
+	public ServerAdapter(Context context, List<Server> servers) {
 		super();
 		this.context = context;
 		this.servers = servers;
@@ -38,6 +37,7 @@ public class ServerAdapter extends BaseAdapter {
 	static class ViewHolder {
 		private TextView displayName;
 		private TextView host;
+		private TextView username;
 	}
 
 	/**
@@ -79,6 +79,7 @@ public class ServerAdapter extends BaseAdapter {
 			ViewHolder viewHolder = new ViewHolder();
 			viewHolder.displayName = (TextView) view.findViewById(R.id.displayNameTextView);
 			viewHolder.host = (TextView) view.findViewById(R.id.hostTextView);
+			viewHolder.username = (TextView) view.findViewById(R.id.usernameTextView);
 			view.setTag(viewHolder);
 		}
 		
@@ -88,7 +89,13 @@ public class ServerAdapter extends BaseAdapter {
 		
 		holder.displayName.setText(server.getDisplayName());
 		holder.host.setText(String.format("%s:%d", server.getIp(), server.getPort()));
+		holder.username.setText(server.getUsername());
 		return view;
+	}
+	
+	public void setList(List<Server> servers) {
+		this.servers = servers;
+		this.notifyDataSetChanged();
 	}
 
 }
