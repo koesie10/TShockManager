@@ -96,7 +96,7 @@ public class ServerFragment extends BaseDashboardFragment implements
 				// TODO Ask for a confirmation
 				// TODO Show a progress dialog
 				TShockApi.serverOff();
-
+				getActivity().finish();
 			}
 		});
 
@@ -107,7 +107,7 @@ public class ServerFragment extends BaseDashboardFragment implements
 				// TODO Ask for a confirmation
 				// TODO Show a progress dialog
 				TShockApi.serverRestart();
-
+				getActivity().finish();
 			}
 		});
 
