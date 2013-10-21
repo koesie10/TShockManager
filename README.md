@@ -23,4 +23,15 @@ When you start working on something, create an issue first so that we know that 
 To add a new command, first add it to `co.tshock.manager.events.EventType` as a new field. Also add the params in a `EventParamInfo` object if needed. The next thing you should do is adding a method in `co.tshock.manager.api.TShockApi`. See the other methods as a reference. The last thing you have to do is add the command to the section in the UI. This can be done in one of the classes of `co.tshock.manager.ui.fragments.dashboard`. See `ServerFragment` for an example.
 
 ## To do ##
-Actually the project-libraries is not required anymore as it is only needed for Eclipse projects. But I left it here so Eclipse users (which includes me) don't get all kinds of errors.
+
+* Actually the project-libraries is not required anymore as it is only needed for Eclipse projects. But I left it here so Eclipse users (which includes me) don't get all kinds of errors.
+* Create tests
+* Create all fragments with all REST commands that exist (see [this](https://github.com/NyxStudios/TShock/blob/master/TShockAPI/Rest/RestManager.cs))
+
+### Bugs ###
+
+* None I know of yet
+
+### Features ###
+
+* Real-time server chat
