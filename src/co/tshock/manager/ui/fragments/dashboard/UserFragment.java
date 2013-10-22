@@ -63,7 +63,7 @@ public class UserFragment extends BaseDashboardFragment implements EventListener
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_refresh:
-                this.refreshUserList();;
+                this.refreshUserList();
                 break;
             case R.id.action_add:
                 // TODO Add a user dialog
