@@ -35,3 +35,48 @@ To add a new command, first add it to `co.tshock.manager.events.EventType` as a 
 ### Features ###
 
 * Real-time server chat
+
+
+## Responses ##
+### /v2/players/list ###
+```
+{
+  "status": "200",
+  "players": [
+    {
+      "nickname": "Koen",
+      "username": "Koen",
+      "group": "superadmin",
+      "active": true,
+      "state": 10,
+      "team": 0
+    },
+    {
+      "nickname": "Rinse",
+      "username": "Rinse",
+      "group": "guest",
+      "active": true,
+      "state": 10,
+      "team": 0
+    }
+  ]
+}
+```
+
+### /v2/users/read ###
+```
+{
+    "status": "200",
+    "group": "guest",
+    "id": "3",
+    "name": "Rinse"
+}
+```
+
+### /v2/users/activelist ###
+```
+{
+  "status": "200",
+  "activeusers": "Koen\tRinse"
+}
+```
