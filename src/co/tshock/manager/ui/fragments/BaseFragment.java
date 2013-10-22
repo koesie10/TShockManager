@@ -6,7 +6,8 @@ import co.tshock.manager.R;
 import co.tshock.manager.ui.dialogs.SettingsDialogFragment;
 
 public class BaseFragment extends Fragment {
-
+    // Cast needed for Android Studio/IntelliJ
+    protected final String TAG = ((Object)this).getClass().getSimpleName();
 	/**
 	 * {@inheritDoc}
 	 */

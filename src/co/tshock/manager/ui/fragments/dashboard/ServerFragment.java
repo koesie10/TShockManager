@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.EditText;
+
 import co.tshock.manager.R;
 import co.tshock.manager.api.Server;
 import co.tshock.manager.api.TShockApi;
@@ -24,7 +27,7 @@ import co.tshock.manager.events.EventType;
 public class ServerFragment extends BaseDashboardFragment implements
 		EventListener {
 	private static final EventType[] types = new EventType[] { EventType.ERROR,
-			EventType.SERVER_STATUS };
+			EventType.SERVER_STATUS, EventType.SERVER_BROADCAST, EventType.SERVER_RAWCMD };
 
 	private TextView serverNameTextView;
 	private TextView serverPortTextView;
@@ -34,6 +37,10 @@ public class ServerFragment extends BaseDashboardFragment implements
 	private TextView serverPasswordTextView;
 	private Button serverOffButton;
 	private Button serverRestartButton;
+    private EditText serverBroadcastEditText;
+    private Button serverBroadcastButton;
+    private EditText serverRawCmdEditText;
+    private Button serverRawCmdButton;
 	private ServerStatus serverStatus;
 
 	@Override
@@ -88,6 +95,10 @@ public class ServerFragment extends BaseDashboardFragment implements
 				.findViewById(R.id.serverPasswordTextView);
 		this.serverOffButton = (Button) v.findViewById(R.id.serverOffButton);
 		this.serverRestartButton = (Button) v.findViewById(R.id.serverRestartButton);
+        this.serverBroadcastEditText = (EditText) v.findViewById(R.id.serverBroadcastEditText);
+        this.serverBroadcastButton = (Button) v.findViewById(R.id.serverBroadcastButton);
+        this.serverRawCmdEditText = (EditText) v.findViewById(R.id.serverRawCmdEditText);
+        this.serverRawCmdButton = (Button) v.findViewById(R.id.serverRawCmdButton);
 
 		this.serverOffButton.setOnClickListener(new View.OnClickListener() {
 
@@ -110,6 +121,28 @@ public class ServerFragment extends BaseDashboardFragment implements
 				getActivity().finish();
 			}
 		});
+
+        this.serverBroadcastButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Show a progress dialog
+                String message = serverBroadcastEditText.getText().toString();
+                TShockApi.serverBroadcast(message);
+            }
+        });
+
+        this.serverRawCmdButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Show a progress dialog
+                // TODO Show the message returned from the server
+                String cmd = serverRawCmdEditText.getText().toString();
+                if (!cmd.startsWith("/")) {
+                    cmd = "/" + cmd;
+                }
+                TShockApi.serverRawCmd(cmd);
+            }
+        });
 
 		refreshInterface();
 

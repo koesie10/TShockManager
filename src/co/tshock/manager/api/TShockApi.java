@@ -34,11 +34,6 @@ public class TShockApi {
 	 * 
 	 * This token is needed to authenticate most of the other calls, so this
 	 * should be called first.
-	 * 
-	 * @param username
-	 *            The username of the server account authenticating to
-	 * @param password
-	 *            The password of the server account authenticating to
 	 */
 	public static void createToken() {
 		get(EventType.CREATE_TOKEN, new TShockResponseHandler.DataProcessor() {
@@ -59,7 +54,7 @@ public class TShockApi {
 	/**
 	 * This call destroys the token that is currently in use
 	 * 
-	 * The token has been made with {@link #createToken(String, String)}
+	 * The token has been made with {@link #createToken()}
 	 */
 	public static void destroyToken() {
 		get(EventType.DESTROY_TOKEN, new TShockResponseHandler.DataProcessor() {
@@ -116,17 +111,28 @@ public class TShockApi {
 	public static void serverBroadcast(final String message) {
 		RequestParams params = new RequestParams();
 		params.put("msg", message);
-		get(EventType.SERVER_BROADCAST, params,
-				new TShockResponseHandler.DataProcessor() {
+		get(EventType.SERVER_BROADCAST,
+                new TShockResponseHandler.DataProcessor() {
 
-					@Override
-					public void parseResponse(JSONObject object,
-							Map<String, Object> data) throws JSONException {
-						data.put("message", message);
+                    @Override
+                    public void parseResponse(JSONObject object,
+                                              Map<String, Object> data) throws JSONException {
+                        data.put("message", message);
 
-					}
-				});
+                    }
+                }, params);
 	}
+
+    public static void serverRawCmd(final String cmd) {
+        RequestParams params = new RequestParams();
+        params.put("cmd", cmd);
+        get(EventType.SERVER_RAWCMD, new TShockResponseHandler.DataProcessor() {
+            @Override
+            public void parseResponse(JSONObject object, Map<String, Object> data) throws JSONException {
+                data.put("cmd", cmd);
+            }
+        }, params);
+    }
 	
 	/**
 	 * Turns off the server, you will get an ERROR as the server will not respond (correctly)!
@@ -167,9 +173,8 @@ public class TShockApi {
 	 * and port
 	 * 
 	 * @return the base URL to make requests to without trailing slash
-	 * @see #setServer(String, int)
-	 * @see #getIp()
-	 * @see #getPort()
+	 * @see #setServer(Server server)
+	 * @see #getServer()
 	 */
 	public static String getBaseUrl() {
 		return String.format("http://%s:%d", server.getIp(), server.getPort());

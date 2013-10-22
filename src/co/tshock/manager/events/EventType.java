@@ -70,7 +70,7 @@ public enum EventType {
 									InputType.TYPE_CLASS_TEXT,
 									R.string.boolean_false) }))),
 	SERVER_RAWCMD("/v3/server/rawcmd",
-			new EventTypeInfo(R.string.rawcmd, true, new EventParamList(
+			new EventTypeInfo(R.string.server_rawcmd, true, new EventParamList(
 					new EventParam[] { new EventParam("cmd", R.string.cmd,
 							InputType.TYPE_CLASS_TEXT, R.string.slash) })));
 

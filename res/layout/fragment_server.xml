@@ -6,12 +6,18 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ServerActivity" >
+    tools:context=".ui.activities.dashboard.DashboardActivity" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -131,7 +137,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
-            
+
             <Button
                 android:id="@+id/serverOffButton"
                 android:layout_width="wrap_content"
@@ -144,6 +150,52 @@
                 android:layout_height="wrap_content"
                 android:textAllCaps="true"
                 android:text="@string/server_restart" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1.0" >
+
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_weight="0.7"
+                android:layout_height="wrap_content"
+                android:id="@+id/serverBroadcastEditText"
+                android:hint="@string/server_broadcast_hint"/>
+
+            <Button
+                android:id="@+id/serverBroadcastButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="true"
+                android:layout_weight="0.3"
+                android:text="@string/server_broadcast" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1.0" >
+
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_weight="0.7"
+                android:layout_height="wrap_content"
+                android:id="@+id/serverRawCmdEditText"
+                android:hint="@string/server_rawcmd_hint"/>
+
+            <Button
+                android:id="@+id/serverRawCmdButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="true"
+                android:layout_weight="0.3"
+                android:text="@string/server_rawcmd" />
         </LinearLayout>
     </LinearLayout>
 

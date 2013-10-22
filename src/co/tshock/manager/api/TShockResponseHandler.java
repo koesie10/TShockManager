@@ -44,7 +44,7 @@ public class TShockResponseHandler extends JsonHttpResponseHandler {
 	 * 
 	 * @param eventType
 	 *            The event type this handler should handle
-	 * @see #TerrariaResponseHandler(EventType, DataProcessor)
+	 * @see #TShockResponseHandler(co.tshock.manager.events.EventType, co.tshock.manager.api.TShockResponseHandler.DataProcessor)
 	 */
 	public TShockResponseHandler(EventType eventType) {
 		this.eventType = eventType;
@@ -64,8 +64,9 @@ public class TShockResponseHandler extends JsonHttpResponseHandler {
 				reportError(data, object.getString("error"));
 				return;
 			}
+            String response = "";
 			if (object.has("response")) {
-				String response = object.getString("response");
+				response = object.getString("response");
 				data.put("response", response);
 			}
 			if (statusCode == 200) {

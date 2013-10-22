@@ -7,10 +7,12 @@
 
     <!-- Server commands -->
     <!-- Titles -->
-    <string name="server_broadcast">Server broadcast</string>
+    <string name="server_broadcast">Say</string>
+    <string name="server_broadcast_hint">Your message here</string>
     <string name="server_off">Off</string>
     <string name="server_restart">Restart</string>
-    <string name="rawcmd">Execute command</string>
+    <string name="server_rawcmd">Execute</string>
+    <string name="server_rawcmd_hint">Example: /playing</string>
     <!-- Params -->
     <string name="message">Message</string>
     <string name="confirm">Confirm (true is confirm)</string>

@@ -135,7 +135,7 @@ public class EventManager {
 	/**
 	 * Unregisters the specified listeners from the given event types
 	 * 
-	 * @param type
+	 * @param types
 	 *            Event types from which the listeners have to be unregistered
 	 * @param listeners
 	 *            Listeners to unregister
@@ -155,6 +155,7 @@ public class EventManager {
 	public void notify(Event event) {
 		ArrayList<EventListener> typeListeners = listeners.get(event.getType());
 		if (typeListeners == null) {
+            Log.i(TAG, "Notifying 0 listeners of event " + event.toString());
 			return;
 		}
 		Log.i(TAG, "Notifying " + typeListeners.size() + " listeners of event " + event.toString());
