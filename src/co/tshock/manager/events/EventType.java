@@ -51,7 +51,8 @@ public enum EventType {
 	SERVER_OFF("/v2/server/off"),
 	SERVER_RESTART("/v3/server/restart"),
 	SERVER_RAWCMD("/v3/server/rawcmd"),
-    USER_ACTIVE_LIST("/2/users/activelist");
+    USER_ACTIVE_LIST("/v2/users/activelist"),
+    USER_READ("/v2/users/read");
 
 	private String url;
 

@@ -14,7 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import co.tshock.manager.Constants;
 import co.tshock.manager.R;
-import co.tshock.manager.api.Server;
+import co.tshock.manager.data.models.Server;
 import co.tshock.manager.data.adapter.ServerAdapter;
 import co.tshock.manager.data.sqlite.DatabaseHelper;
 import co.tshock.manager.events.Event;

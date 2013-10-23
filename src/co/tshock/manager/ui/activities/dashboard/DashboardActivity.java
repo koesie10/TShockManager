@@ -16,7 +16,7 @@ import android.support.v7.app.ActionBar;
 import android.util.Log;
 import co.tshock.manager.Constants;
 import co.tshock.manager.R;
-import co.tshock.manager.api.Server;
+import co.tshock.manager.data.models.Server;
 import co.tshock.manager.api.TShockApi;
 import co.tshock.manager.data.sqlite.DatabaseHelper;
 import co.tshock.manager.events.Event;

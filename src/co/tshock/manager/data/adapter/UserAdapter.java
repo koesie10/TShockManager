@@ -10,7 +10,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import co.tshock.manager.R;
-import co.tshock.manager.api.Server;
 import co.tshock.manager.data.models.User;
 
 /**

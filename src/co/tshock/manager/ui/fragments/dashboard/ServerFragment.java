@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,7 +16,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 
 import co.tshock.manager.R;
-import co.tshock.manager.api.Server;
+import co.tshock.manager.data.models.Server;
 import co.tshock.manager.api.TShockApi;
 import co.tshock.manager.events.Event;
 import co.tshock.manager.events.EventListener;

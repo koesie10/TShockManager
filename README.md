@@ -24,9 +24,10 @@ To add a new command, first add it to `co.tshock.manager.events.EventType` as a 
 
 ## To do ##
 
-* Actually the project-libraries is not required anymore as it is only needed for Eclipse projects. But I left it here so Eclipse users (which includes me) don't get all kinds of errors.
+* Actually the project-libraries is not required anymore as it is only needed for Eclipse projects. But I left it here so Eclipse users don't get all kinds of errors.
 * Create tests
 * Create all fragments with all REST commands that exist (see [this](https://github.com/NyxStudios/TShock/blob/master/TShockAPI/Rest/RestManager.cs))
+* Read all the TODO's in the code :)
 
 ### Bugs ###
 

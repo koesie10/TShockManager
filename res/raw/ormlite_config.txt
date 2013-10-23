@@ -2,7 +2,7 @@
 # generated on 2013/10/20 01:29:31
 #
 # --table-start--
-dataClass=co.tshock.manager.api.Server
+dataClass=co.tshock.manager.data.models.Server
 tableName=servers
 # --table-fields-start--
 # --field-start--

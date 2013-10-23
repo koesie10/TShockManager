@@ -1,5 +1,6 @@
 package co.tshock.manager.api;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.json.JSONException;
@@ -7,6 +8,9 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
+
+import co.tshock.manager.data.models.Server;
+import co.tshock.manager.data.models.User;
 import co.tshock.manager.events.Event;
 import co.tshock.manager.events.EventType;
 
@@ -135,7 +139,8 @@ public class TShockApi {
     }
 	
 	/**
-	 * Turns off the server, you will get an ERROR as the server will not respond (correctly)!
+	 * Turns off the server, you may get an ERROR when the server shuts down too early and it cannot
+     * give a response.
 	 */
 	public static void serverOff() {
 		RequestParams params = new RequestParams();
@@ -144,13 +149,47 @@ public class TShockApi {
 	}
 	
 	/**
-	 * Restart off the server, you will get an ERROR as the server will not respond (correctly)!
+	 * Restart off the server, you may get an ERROR when the server shuts down too early and
+     * it cannot give a response.
 	 */
 	public static void serverRestart() {
 		RequestParams params = new RequestParams();
 		params.put("confirm", "true");
 		get(EventType.SERVER_RESTART, params);
 	}
+
+    public static void userActiveList() {
+        get(EventType.USER_ACTIVE_LIST, new TShockResponseHandler.DataProcessor() {
+
+            @Override
+            public void parseResponse(JSONObject object, Map<String, Object> data) throws JSONException {
+                String rawActiveUsers = object.getString("activeusers");
+                String[] activeUsers = rawActiveUsers.split("\t");
+                ArrayList<User> users = new ArrayList<User>();
+                for (String activeUser : activeUsers) {
+                    users.add(new User(activeUser));
+                }
+                data.put("activeUsers", users);
+            }
+        });
+    }
+
+    public static void userRead(String name, final DirectResponseHandler handler) {
+        get(EventType.USER_READ, new TShockResponseHandler.DataProcessor() {
+            @Override
+            public void parseResponse(JSONObject object, Map<String, Object> data)
+                    throws JSONException {
+                String group = object.getString("group");
+                int id = object.getInt("id");
+                String name = object.getString("name");
+                data.put("user", new User(group, id, name));
+                if (handler != null) {
+                    handler.onResponse(data);
+                }
+            }
+        });
+    }
+
 	
 	
 
@@ -233,4 +272,8 @@ public class TShockApi {
 	private static String getAbsoluteUrl(String relativeUrl) {
 		return getBaseUrl() + relativeUrl;
 	}
+
+    public static interface DirectResponseHandler {
+        public void onResponse(Map<String, Object> data);
+    }
 }

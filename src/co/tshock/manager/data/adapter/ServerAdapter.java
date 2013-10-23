@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import co.tshock.manager.R;
-import co.tshock.manager.api.Server;
+import co.tshock.manager.data.models.Server;
 
 /**
  * An adapter for {@link Server} objects

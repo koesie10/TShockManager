@@ -12,25 +12,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
+
 import co.tshock.manager.Constants;
 import co.tshock.manager.R;
 import co.tshock.manager.data.models.Server;
+import co.tshock.manager.data.models.User;
 import co.tshock.manager.data.sqlite.DatabaseHelper;
 import co.tshock.manager.events.Event;
 import co.tshock.manager.events.EventManager;
 import co.tshock.manager.events.EventType;
 import co.tshock.manager.util.Utils;
 
-public class ServerDialogFragment extends BaseDialogFragment {
+public class EditUserDialogFragment extends BaseDialogFragment {
 	private View view;
 	private Button saveButton;
-	private EditText ipEditText;
-	private EditText portEditText;
-	private EditText displayNameEditText;
-	private EditText usernameEditText;
+	private EditText userEditText;
 	private EditText passwordEditText;
-	private DatabaseHelper dbHelper;
-	private Server server;
+	private EditText groupEditText;
+    private User user;
+    private boolean isNew = true;
 
 	/**
 	 * {@inheritDoc}
@@ -43,15 +43,15 @@ public class ServerDialogFragment extends BaseDialogFragment {
 		setStyle(style, theme);
 
 		if (getArguments() != null
-				&& getArguments().containsKey(Constants.ARGS_SERVER)) {
-			server = getArguments().getParcelable(Constants.ARGS_SERVER);
+				&& getArguments().containsKey(Constants.ARGS_USER)) {
+			user = getArguments().getParcelable(Constants.ARGS_USER);
+            isNew = false;
 		}
 	}
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		dbHelper = DatabaseHelper.getInstance(activity);
 	}
 
 	/**
@@ -61,17 +61,14 @@ public class ServerDialogFragment extends BaseDialogFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		getDialog().setTitle(R.string.server);
-		view = inflater.inflate(R.layout.dialog_server, container, false);
+		view = inflater.inflate(R.layout.dialog_user_edit, container, false);
 		saveButton = (Button) view.findViewById(R.id.saveButton);
-		ipEditText = (EditText) view.findViewById(R.id.ipEditText);
-		portEditText = (EditText) view.findViewById(R.id.portEditText);
-		displayNameEditText = (EditText) view
-				.findViewById(R.id.displayNameEditText);
-		usernameEditText = (EditText) view.findViewById(R.id.usernameEditText);
-		passwordEditText = (EditText) view.findViewById(R.id.passwordEditText);
+		userEditText = (EditText) view.findViewById(R.id.nameEditText);
+        passwordEditText = (EditText) view.findViewById(R.id.passwordEditText);
+        groupEditText = (EditText) view.findViewById(R.id.groupEditText);
 
-		passwordEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-		passwordEditText
+		groupEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+		groupEditText
 				.setOnEditorActionListener(new OnEditorActionListener() {
 
 					@Override
@@ -91,14 +88,13 @@ public class ServerDialogFragment extends BaseDialogFragment {
 			}
 		});
 
-		if (server != null) {
-			ipEditText.setText(server.getIp());
-			portEditText.setText(Integer.toString(server.getPort()));
-			displayNameEditText.setText(server.getDisplayName());
-			usernameEditText.setText(server.getUsername());
-			passwordEditText.setText(server.getPassword());
+		if (user != null) {
+			userEditText.setText(user.getName());
+            userEditText.setEnabled(false);
+            passwordEditText.setEnabled(true);
+            groupEditText.setText(user.getGroup());
 		} else {
-			server = new Server();
+			user = new User();
 		}
 
 		return view;
@@ -106,22 +102,18 @@ public class ServerDialogFragment extends BaseDialogFragment {
 
 	private void save() {
 		// The server should be added here
-		String ip = ipEditText.getText().toString();
-		int port = Utils.parseInt(portEditText.getText().toString(), 7878);
-		String displayName = displayNameEditText.getText().toString();
-		if (displayName == null || displayName.trim().length() == 0) {
-			displayName = String.format("%s:%d", ip, port);
-		}
-		String username = usernameEditText.getText().toString();
+		String user = userEditText.getText().toString();
 		String password = passwordEditText.getText().toString();
-		server.setIp(ip);
-		server.setPort(port);
-		server.setDisplayName(displayName);
-		server.setUsername(username);
-		server.setPassword(password);
-		dbHelper.getServerDao().createOrUpdate(server);
-		EventManager.getInstance().notify(
-				new Event(EventType.SERVER_LIST_CHANGED));
+        String group = groupEditText.getText().toString();
+		this.user.setName(user);
+        this.user.setPassword(password);
+        this.user.setGroup(group);
+
+        if (isNew) {
+            // TODO Call the server on "/v2/users/create"
+        } else {
+            // TODO Call the server on "/v2/users/update"
+        }
 		dismiss();
 	}
 }

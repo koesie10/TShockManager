@@ -3,6 +3,7 @@
 
     <string name="app_name">TShock Manager</string>
     <string name="placeholder">…</string>
+    <string name="placeholder_long">Hello world this is.</string>
     <string name="submit">Submit</string>
 
     <!-- Server commands -->
@@ -70,5 +71,10 @@
     <string name="player">Player</string>
     <string name="world">World</string>
     <string name="group">Group</string>
+    <string name="name">Username</string>
+    <string name="user_password">New user\'s password</string>
+    <string name="user_group">User\'s group</string>
+    <string name="delete_user">Delete user</string>
+    <string name="edit_user">Edit user</string>
 
 </resources>

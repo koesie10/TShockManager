@@ -1,6 +1,6 @@
 package co.tshock.manager;
 
-import co.tshock.manager.api.Server;
+import co.tshock.manager.data.models.Server;
 
 import com.j256.ormlite.android.apptools.OrmLiteConfigUtil;
 
@@ -11,7 +11,7 @@ import com.j256.ormlite.android.apptools.OrmLiteConfigUtil;
  * Add all classes that are put in the database to the classes array
  * 
  * Remove <code>implements {@link android.os.Parcelable}</code> temporarily from
- * {@link co.tshock.manager.api.Server} to let this program run correctly
+ * {@link co.tshock.manager.data.models.Server} to let this program run correctly
  * 
  * Steps to run this are described at {@linkplain http
  * ://ormlite.com/javadoc/ormlite
