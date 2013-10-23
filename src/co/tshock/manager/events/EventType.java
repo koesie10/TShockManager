@@ -19,7 +19,7 @@ public enum EventType {
 	 * This event will create a token and this will be broadcasted to the
 	 * listeners with token in {@link Event#getData()}
 	 * 
-	 * @see co.tshock.manager.api.TShockApi#createToken(String, String)
+	 * @see co.tshock.manager.api.TShockApi#createToken()
 	 */
 	CREATE_TOKEN("/v2/token/create/%2$s?username=%1$s"),
 	/**
@@ -46,44 +46,17 @@ public enum EventType {
 	 * 
 	 * @see co.tshock.manager.api.TShockApi#serverBroadcast(String)
 	 */
-	SERVER_BROADCAST("/v2/server/broadcast", new EventTypeInfo(
-			R.string.server_broadcast, true,
-			new EventParamList(new EventParam[] { new EventParam("msg",
-					R.string.message) }))),
+	SERVER_BROADCAST("/v2/server/broadcast"),
 	SERVER_RELOAD("/v3/server/reload"),
-	SERVER_OFF("/v2/server/off", new EventTypeInfo(R.string.server_off, true,
-			new EventParamList(
-					new EventParam[] {
-							new EventParam("confirm", R.string.confirm,
-									InputType.TYPE_CLASS_TEXT,
-									R.string.boolean_true),
-							new EventParam("nosave", R.string.nosave,
-									InputType.TYPE_CLASS_TEXT,
-									R.string.boolean_false) }))),
-	SERVER_RESTART("/v3/server/restart", new EventTypeInfo(
-			R.string.server_restart, true, new EventParamList(
-					new EventParam[] {
-							new EventParam("confirm", R.string.confirm,
-									InputType.TYPE_CLASS_TEXT,
-									R.string.boolean_true),
-							new EventParam("nosave", R.string.nosave,
-									InputType.TYPE_CLASS_TEXT,
-									R.string.boolean_false) }))),
-	SERVER_RAWCMD("/v3/server/rawcmd",
-			new EventTypeInfo(R.string.server_rawcmd, true, new EventParamList(
-					new EventParam[] { new EventParam("cmd", R.string.cmd,
-							InputType.TYPE_CLASS_TEXT, R.string.slash) })));
+	SERVER_OFF("/v2/server/off"),
+	SERVER_RESTART("/v3/server/restart"),
+	SERVER_RAWCMD("/v3/server/rawcmd"),
+    USER_ACTIVE_LIST("/2/users/activelist");
 
 	private String url;
-	private EventTypeInfo info;
-
-	private EventType(String url, EventTypeInfo info) {
-		this.url = url;
-		this.info = info;
-	}
 
 	private EventType(String url) {
-		this(url, new EventTypeInfo());
+		this.url = url;
 	}
 
 	private EventType() {
@@ -115,15 +88,6 @@ public enum EventType {
 	 */
 	public String getUrl(Object... args) {
 		return String.format(url, args);
-	}
-
-	/**
-	 * Gets the info associated with this event type
-	 * 
-	 * @return
-	 */
-	public EventTypeInfo getInfo() {
-		return info;
 	}
 
 	/**
